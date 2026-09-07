@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pedido de namoro divertido e criativo.">
+    <title>Vamos para casa comigo?</title>
+    <style>
+        :root {
+            --bg-color: #ff7a7a;
+            --card-color: rgba(255, 255, 255, 0.18);
+            --text-color: #fff;
+            --button-dark: #111111;
+            --button-dark-hover: #000000;
+            --button-light: #fff;
+            --button-light-hover: #f2f2f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: var(--bg-color);
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-color);
+        }
+
+        #conteudo {
+            width: min(90vw, 600px);
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--card-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            margin: 0 0 28px;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.3;
+        }
+
+        .botoes {
+            position: relative;
+            width: 220px;
+            height: 90px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            min-width: 90px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-sim {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--button-dark);
+            color: var(--text-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-sim:hover {
+            background: var(--button-dark-hover);
+        }
+
+        .btn-nao {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--button-light);
+            color: var(--button-dark);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-nao:hover {
+            background: var(--button-light-hover);
+        }
+    </style>
+</head>
+
+<body>
+    <main id="conteudo">
+        <h2>Aceita ir para casa comigo pós pastel kkk?</h2>
+
+        <div class="botoes" aria-label="Escolha">
+            <button class="btn btn-sim" type="button" onclick="sim()">SIM</button>
+            <button class="btn btn-nao" type="button" onclick="desvia(this)" onmouseover="desvia(this)">NÃO</button>
+        </div>
+    </main>
+
+    <script>
+        function sim() {
+            alert('Você aceitou ir para casa comigo! :)');
+            window.location.href = 'https://music.youtube.com/watch?v=IVg8Kb3_vSg&list=RDAMVMC6Eo84iXHak';
+        }
+
+        function desvia(btn) {
+            const container = document.querySelector('.botoes');
+            const containerRect = container.getBoundingClientRect();
+
+            btn.style.position = 'absolute';
+            btn.style.left = geraPosicao(10, 65) + '%';
+            btn.style.top = geraPosicao(10, 75) + '%';
+            btn.style.transform = 'none';
+
+            const maxLeft = containerRect.width - btn.offsetWidth;
+            const maxTop = containerRect.height - btn.offsetHeight;
+
+            btn.style.left = Math.min(Math.max(geraPosicao(0, 100), 0), 100) + '%';
+            btn.style.top = Math.min(Math.max(geraPosicao(0, 100), 0), 100) + '%';
+        }
+
+        function geraPosicao(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+    </script>
+</body>
+
+</html>
